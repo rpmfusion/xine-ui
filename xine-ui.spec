@@ -6,7 +6,7 @@
 Summary:        A skinned xlib-based gui for xine-lib
 Name:           xine-ui
 Version:        0.99.7
-Release:        8%{?dist}
+Release:        9%{?dist}
 License:        GPLv2+
 Group:          Applications/Multimedia
 URL:            http://www.xine-project.org/
@@ -263,9 +263,11 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_bindir}/aaxine
 
 %changelog
+* Wed Oct 23 2013 Xavier Bachelot <xavier@bachelot.org> - 0.99.7-9
+- Rebuild for xine-lib 1.2.
+
 * Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.99.7-8
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
-
 
 * Mon Mar 11 2013 Michael J Gruber <mjg@fedoraproject.org> 0.99.7-7
 - remove xine-check because it requires bits from the devel package
