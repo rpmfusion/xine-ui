@@ -5,8 +5,8 @@
 
 Summary:        A skinned xlib-based gui for xine-lib
 Name:           xine-ui
-Version:        0.99.7
-Release:        9%{?dist}
+Version:        0.99.8
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          Applications/Multimedia
 URL:            http://www.xine-project.org/
@@ -19,16 +19,16 @@ Source0:        http://sourceforge.net/projects/xine/files/xine-ui/%{version}/xi
 # find xine-ui-0.99.6 -name .hg* -exec rm -rf {} \;
 # find xine-ui-0.99.6 -name .cvs* -exec rm -rf {} \;
 # tar jcf xine-ui-0.99.6-20091217.tar.bz2 xine-ui-0.99.6/
-# Source0:	xine-ui-%{version}-%{hgdate}.tar.bz2
-BuildRequires:	autoconf
-BuildRequires:	automake
+# Source0:    xine-ui-%{version}-%{hgdate}.tar.bz2
+BuildRequires:  autoconf
+BuildRequires:  automake
 
 # Patch to use UTF-8 documentation, BZ #512598
 Patch1:         xine-ui-0.99.5-utf8doc.patch
 
 
 #o Sources for -skins. Ugh.
-Source1:	http://xine-project.org/skins/Antares.tar.gz
+Source1:        http://xine-project.org/skins/Antares.tar.gz
 Source2:        http://xine-project.org/skins/Bambino-Black.tar.gz
 Source3:        http://xine-project.org/skins/Bambino-Blue.tar.gz
 Source4:        http://xine-project.org/skins/Bambino-Green.tar.gz
@@ -59,7 +59,7 @@ Source28:       http://xine-project.org/skins/Polaris.tar.gz
 Source29:       http://xine-project.org/skins/Sunset.tar.gz
 Source30:       http://xine-project.org/skins/xinium.tar.gz
 
-Source31:	default.ogv
+Source31:       default.ogv
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 # Package was named xine in rpmfusion
@@ -83,7 +83,7 @@ BuildRequires:  libXxf86vm-devel
 BuildRequires:  readline-devel
 BuildRequires:  xine-lib-devel >= 1.1.0
 BuildRequires:  xorg-x11-proto-devel
-BuildRequires:	libjpeg-turbo-devel
+BuildRequires:  libjpeg-turbo-devel
 
 # Lirc-devel is not available on EPEL-5
 %if 0%{?rhel} == 0
@@ -115,10 +115,10 @@ BuildArch:      noarch
 This package contains extra skins for xine-ui.
 
 %package aaxine
-Summary:	ASCII art player for terminals
-Group:		Applications/Multimedia
-Requires:	%{name} = %{version}-%{release}
-Requires:	xine-lib-extras
+Summary:        ASCII art player for terminals
+Group:          Applications/Multimedia
+Requires:       %{name} = %{version}-%{release}
+Requires:       xine-lib-extras
 
 %description aaxine
 This package contains the ASCII art player for terminals like the vt100
@@ -263,6 +263,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_bindir}/aaxine
 
 %changelog
+* Wed Mar 12 2014 Xavier Bachelot <xavier@bachelot.org> - 0.99.8-1
+- Update to 0.99.8.
+- Remove spurious tabs in specfile.
+
 * Wed Oct 23 2013 Xavier Bachelot <xavier@bachelot.org> - 0.99.7-9
 - Rebuild for xine-lib 1.2.
 
