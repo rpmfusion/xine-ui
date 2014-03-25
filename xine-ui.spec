@@ -6,7 +6,7 @@
 Summary:        A skinned xlib-based gui for xine-lib
 Name:           xine-ui
 Version:        0.99.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Group:          Applications/Multimedia
 URL:            http://www.xine-project.org/
@@ -25,9 +25,14 @@ BuildRequires:  automake
 
 # Patch to use UTF-8 documentation, BZ #512598
 Patch1:         xine-ui-0.99.5-utf8doc.patch
+# FR translation update
+# https://bugs.xine-project.org/show_bug.cgi?id=511
+Patch2:         xine-ui-0.99.8-update_french_translation.patch
+# Fix crash on exit
+# http://anonscm.debian.org/hg/xine-lib/xine-ui/raw-rev/702c252f3200
+Patch3:         xine-ui-0.99.8-fix_crash_on_exit.patch
 
-
-#o Sources for -skins. Ugh.
+# Sources for -skins.
 Source1:        http://xine-project.org/skins/Antares.tar.gz
 Source2:        http://xine-project.org/skins/Bambino-Black.tar.gz
 Source3:        http://xine-project.org/skins/Bambino-Blue.tar.gz
@@ -62,7 +67,8 @@ Source30:       http://xine-project.org/skins/xinium.tar.gz
 Source31:       default.ogv
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-# Package was named xine in rpmfusion
+
+# Package used to be named xine
 Provides:       xine = %{version}-%{release}
 Obsoletes:      xine < %{version}-%{release}
 
@@ -85,34 +91,35 @@ BuildRequires:  xine-lib-devel >= 1.1.0
 BuildRequires:  xorg-x11-proto-devel
 BuildRequires:  libjpeg-turbo-devel
 
-# Lirc-devel is not available on EPEL-5
-%if 0%{?rhel} == 0
+# lirc-devel is not available on EPEL-5
+%if 0%{?fedora} || 0%{?el6}
 BuildRequires:  lirc-devel
 %endif
 
 # For dir ownership
 Requires:       hicolor-icon-theme
-Requires:       xine-lib
+#
 Requires:       xine-lib-extras
+
 
 %description
 xine-ui is the traditional, skinned GUI for xine-lib. 
 
 
-# Skins
-
 %package skins
 Summary:        Extra skins for xine-ui
 Group:          Applications/Multimedia
 Requires:       %{name} = %{version}-%{release}
-# Package in RPMFusion was named skine-skins
-Obsoletes:      xine-skins
-%if 0%{?fedora}>10 || 0%{?rhel}>5
+# Package used to be named xine-skins
+Provides:       xine-skins = %{version}-%{release}
+Obsoletes:      xine-skins < %{version}-%{release}
+%if 0%{?fedora} > 10 || 0%{?rhel} > 5
 BuildArch:      noarch
 %endif
 
 %description skins
 This package contains extra skins for xine-ui.
+
 
 %package aaxine
 Summary:        ASCII art player for terminals
@@ -123,6 +130,7 @@ Requires:       xine-lib-extras
 %description aaxine
 This package contains the ASCII art player for terminals like the vt100
 
+
 %prep
 # Setup xine
 %setup0 -q
@@ -132,6 +140,8 @@ This package contains the ASCII art player for terminals like the vt100
 %setup -T -D
 
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 # By default aaxine dlopen()'s a nonversioned libX11.so, however in Fedora
 # it's provided by libX11-devel => version the dlopen()
@@ -165,6 +175,7 @@ find fedoraskins/ -type d -name ".xvpics" -exec rm -rf {} \; || :
 sed -i 's,default.avi,default.ogv,' src/xitk/actions.c
 sed -i 's,default.avi,default.ogv,' misc/visuals/Makefile.in
 
+
 %build
 ./autogen.sh noconfig
 export LIRC_CFLAGS="-llirc_client"
@@ -172,6 +183,7 @@ export LIRC_LIBS="-llirc_client"
 #%configure --disable-dependency-tracking --enable-vdr-keys --with-aalib XINE_DOCPATH=%{_docdir}/%{name}-%{version}
 # Set documentation directory
 make %{?_smp_mflags}
+
 
 %install
 rm -rf %{buildroot}
@@ -234,6 +246,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_bindir}/xine
 %{_bindir}/xine-remote
 
+%dir %{_datadir}/xine/
 %dir %{_datadir}/xine/skins/
 %{_datadir}/xine/skins/xinetic/
 %{_datadir}/xine/skins/xine-ui_logo.png
@@ -262,7 +275,17 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %defattr(-,root,root,-)
 %{_bindir}/aaxine
 
+
 %changelog
+* Thu Mar 13 2014 Xavier Bachelot <xavier@bachelot.org> - 0.99.8-2
+- Fix xine-skins Obsoletes:/Provides:.
+- Remove explicit Requires: xine-lib.
+- Own %%{_datadir}/xine.
+- Fix conditionnal around BR: lirc-devel.
+- Spec cosmetic cleanup.
+- Add patch to update french translation.
+- Add patch to fix crash on exit.
+
 * Wed Mar 12 2014 Xavier Bachelot <xavier@bachelot.org> - 0.99.8-1
 - Update to 0.99.8.
 - Remove spurious tabs in specfile.
