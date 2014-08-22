@@ -5,8 +5,8 @@
 
 Summary:        A skinned xlib-based gui for xine-lib
 Name:           xine-ui
-Version:        0.99.8
-Release:        2%{?dist}
+Version:        0.99.9
+Release:        1%{?dist}
 License:        GPLv2+
 Group:          Applications/Multimedia
 URL:            http://www.xine-project.org/
@@ -25,12 +25,6 @@ BuildRequires:  automake
 
 # Patch to use UTF-8 documentation, BZ #512598
 Patch1:         xine-ui-0.99.5-utf8doc.patch
-# FR translation update
-# https://bugs.xine-project.org/show_bug.cgi?id=511
-Patch2:         xine-ui-0.99.8-update_french_translation.patch
-# Fix crash on exit
-# http://anonscm.debian.org/hg/xine-lib/xine-ui/raw-rev/702c252f3200
-Patch3:         xine-ui-0.99.8-fix_crash_on_exit.patch
 
 # Sources for -skins.
 Source1:        http://xine-project.org/skins/Antares.tar.gz
@@ -65,8 +59,6 @@ Source29:       http://xine-project.org/skins/Sunset.tar.gz
 Source30:       http://xine-project.org/skins/xinium.tar.gz
 
 Source31:       default.ogv
-
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # Package used to be named xine
 Provides:       xine = %{version}-%{release}
@@ -140,8 +132,6 @@ This package contains the ASCII art player for terminals like the vt100
 %setup -T -D
 
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 # By default aaxine dlopen()'s a nonversioned libX11.so, however in Fedora
 # it's provided by libX11-devel => version the dlopen()
@@ -186,7 +176,6 @@ make %{?_smp_mflags}
 
 
 %install
-rm -rf %{buildroot}
 make install DESTDIR=%{buildroot} INSTALL="install -p"
 %find_lang 'xi\(ne-ui\|tk\)'
 
@@ -213,10 +202,6 @@ rm -f %{buildroot}%{_mandir}/xine-check.*
 cp -a fedoraskins/* %{buildroot}%{_datadir}/xine/skins/
 
 
-%clean
-rm -rf %{buildroot}
-
-
 %post
 # Mime type
 update-desktop-database &> /dev/null || :
@@ -239,7 +224,6 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files -f 'xi\(ne-ui\|tk\)'.lang
-%defattr(-,root,root,-)
 %doc doc/README*
 %{_bindir}/cacaxine
 %{_bindir}/fbxine
@@ -265,18 +249,20 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %lang(pl) %{_mandir}/pl/man1/*.1.gz
 
 %files skins
-%defattr(-,root,root,-)
 %{_datadir}/xine/skins/*
 %exclude %{_datadir}/xine/skins/xinetic/
 %exclude %{_datadir}/xine/skins/xine-ui_logo.png
 %exclude %{_datadir}/xine/skins/xine_splash.png
 
 %files aaxine
-%defattr(-,root,root,-)
 %{_bindir}/aaxine
 
 
 %changelog
+* Fri Aug 22 2014 Xavier Bachelot <xavier@bachelot.org> - 0.99.9-1
+- Update to 0.99.9.
+- Modernize specfile.
+
 * Thu Mar 13 2014 Xavier Bachelot <xavier@bachelot.org> - 0.99.8-2
 - Fix xine-skins Obsoletes:/Provides:.
 - Remove explicit Requires: xine-lib.
