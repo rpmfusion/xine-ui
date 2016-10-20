@@ -6,7 +6,7 @@
 Summary:        A skinned xlib-based gui for xine-lib
 Name:           xine-ui
 Version:        0.99.9
-Release:        1%{?dist}
+Release:        2%{?dist}
 License:        GPLv2+
 Group:          Applications/Multimedia
 URL:            http://www.xine-project.org/
@@ -194,9 +194,11 @@ rm -rf %{buildroot}%{_docdir}/
 
 # Remove misdesigned xine-check
 rm -f %{buildroot}%{_bindir}/xine-bugreport
-rm -f %{buildroot}%{_mandir}/xine-bugreport.*
+rm -f %{buildroot}%{_mandir}/*/man1/xine-bugreport.*
+rm -f %{buildroot}%{_mandir}/man1/xine-bugreport.*
 rm -f %{buildroot}%{_bindir}/xine-check
-rm -f %{buildroot}%{_mandir}/xine-check.*
+rm -f %{buildroot}%{_mandir}/*/man1/xine-check.*
+rm -f %{buildroot}%{_mandir}/man1/xine-check.*
 
 # Install extra skins
 cp -a fedoraskins/* %{buildroot}%{_datadir}/xine/skins/
@@ -242,11 +244,11 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/applications/*xine.desktop
 %{_datadir}/icons/hicolor/*x*/apps/xine.png
 %{_datadir}/pixmaps/xine.xpm
-%{_mandir}/man1/*.1.gz
-%lang(de) %{_mandir}/de/man1/*.1.gz
-%lang(es) %{_mandir}/es/man1/*.1.gz
-%lang(fr) %{_mandir}/fr/man1/*.1.gz
-%lang(pl) %{_mandir}/pl/man1/*.1.gz
+%{_mandir}/man1/xine*
+%lang(de) %{_mandir}/de/man1/xine*
+%lang(es) %{_mandir}/es/man1/xine*
+%lang(fr) %{_mandir}/fr/man1/xine*
+%lang(pl) %{_mandir}/pl/man1/xine*
 
 %files skins
 %{_datadir}/xine/skins/*
@@ -256,9 +258,15 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files aaxine
 %{_bindir}/aaxine
-
+%{_mandir}/man1/aaxine*
+%lang(de) %{_mandir}/de/man1/aaxine*
+%lang(es) %{_mandir}/es/man1/aaxine*
+%lang(pl) %{_mandir}/pl/man1/aaxine*
 
 %changelog
+* Thu Oct 20 2016 Leigh Scott <leigh123linux@googlemail.com> - 0.99.9-2
+- Fix man files (rfbz#4297)
+
 * Fri Aug 22 2014 Xavier Bachelot <xavier@bachelot.org> - 0.99.9-1
 - Update to 0.99.9.
 - Modernize specfile.
