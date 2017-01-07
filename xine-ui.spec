@@ -6,7 +6,7 @@
 Summary:        A skinned xlib-based gui for xine-lib
 Name:           xine-ui
 Version:        0.99.9
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        GPLv2+
 Group:          Applications/Multimedia
 URL:            http://www.xine-project.org/
@@ -84,7 +84,7 @@ BuildRequires:  xorg-x11-proto-devel
 BuildRequires:  libjpeg-turbo-devel
 
 # lirc-devel is not available on EPEL-5
-%if 0%{?fedora} || 0%{?el6}
+%if 0%{?fedora} || 0%{?rhel} >= 6
 BuildRequires:  lirc-devel
 %endif
 
@@ -264,6 +264,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %lang(pl) %{_mandir}/pl/man1/aaxine*
 
 %changelog
+* Sat Jan 07 2017 Xavier Bachelot <xavier@bachelot.org> - 0.99.9-3
+- Fix conditional BR on lirc-devel for EL7.
+
 * Thu Oct 20 2016 Leigh Scott <leigh123linux@googlemail.com> - 0.99.9-2
 - Fix man files (rfbz#4297)
 
