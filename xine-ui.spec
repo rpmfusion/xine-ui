@@ -218,7 +218,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files -f 'xi\(ne-ui\|tk\)'.lang
 %license COPYING
-%doc Changelog doc/README*
+%doc ChangeLog doc/README*
 %{_bindir}/cacaxine
 %{_bindir}/fbxine
 %{_bindir}/xine
