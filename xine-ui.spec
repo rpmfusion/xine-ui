@@ -5,10 +5,9 @@
 
 Summary:        A skinned xlib-based gui for xine-lib
 Name:           xine-ui
-Version:        0.99.9
-Release:        3%{?dist}
+Version:        0.99.10
+Release:        1%{?dist}
 License:        GPLv2+
-Group:          Applications/Multimedia
 URL:            http://www.xine-project.org/
 
 Source0:        http://sourceforge.net/projects/xine/files/xine-ui/%{version}/xine-ui-%{version}.tar.xz
@@ -69,6 +68,7 @@ BuildRequires:  curl-devel >= 7.10.2
 BuildRequires:  desktop-file-utils
 BuildRequires:  gettext
 BuildRequires:  libcaca-devel
+BuildRequires:  libjpeg-turbo-devel
 BuildRequires:  libpng-devel >= 1.5
 BuildRequires:  libtermcap-devel
 BuildRequires:  libXft-devel
@@ -78,15 +78,10 @@ BuildRequires:  libXt-devel
 BuildRequires:  libXtst-devel
 BuildRequires:  libXv-devel
 BuildRequires:  libXxf86vm-devel
+BuildRequires:  lirc-devel
 BuildRequires:  readline-devel
 BuildRequires:  xine-lib-devel >= 1.1.0
 BuildRequires:  xorg-x11-proto-devel
-BuildRequires:  libjpeg-turbo-devel
-
-# lirc-devel is not available on EPEL-5
-%if 0%{?fedora} || 0%{?rhel} >= 6
-BuildRequires:  lirc-devel
-%endif
 
 # For dir ownership
 Requires:       hicolor-icon-theme
@@ -100,14 +95,11 @@ xine-ui is the traditional, skinned GUI for xine-lib.
 
 %package skins
 Summary:        Extra skins for xine-ui
-Group:          Applications/Multimedia
 Requires:       %{name} = %{version}-%{release}
 # Package used to be named xine-skins
 Provides:       xine-skins = %{version}-%{release}
 Obsoletes:      xine-skins < %{version}-%{release}
-%if 0%{?fedora} > 10 || 0%{?rhel} > 5
 BuildArch:      noarch
-%endif
 
 %description skins
 This package contains extra skins for xine-ui.
@@ -115,12 +107,11 @@ This package contains extra skins for xine-ui.
 
 %package aaxine
 Summary:        ASCII art player for terminals
-Group:          Applications/Multimedia
 Requires:       %{name} = %{version}-%{release}
 Requires:       xine-lib-extras
 
 %description aaxine
-This package contains the ASCII art player for terminals like the vt100
+This package contains the ASCII art player for terminals like the vt100.
 
 
 %prep
@@ -226,12 +217,12 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files -f 'xi\(ne-ui\|tk\)'.lang
-%doc doc/README*
+%license COPYING
+%doc ChangeLog doc/README*
 %{_bindir}/cacaxine
 %{_bindir}/fbxine
 %{_bindir}/xine
 %{_bindir}/xine-remote
-
 %dir %{_datadir}/xine/
 %dir %{_datadir}/xine/skins/
 %{_datadir}/xine/skins/xinetic/
@@ -239,7 +230,6 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/xine/skins/xine_splash.png
 %{_datadir}/xine/oxine/
 %{_datadir}/xine/visuals/
-
 %{_datadir}/mime/packages/xine-ui.xml
 %{_datadir}/applications/*xine.desktop
 %{_datadir}/icons/hicolor/*x*/apps/xine.png
@@ -263,7 +253,20 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %lang(es) %{_mandir}/es/man1/aaxine*
 %lang(pl) %{_mandir}/pl/man1/aaxine*
 
+
 %changelog
+* Sun Dec 31 2017 Xavier Bachelot <xavier@bachelot.org> - 0.99.10-1
+- Update to 0.99.10.
+- Drop obsolete conditionals.
+- Drop Group: tags.
+- Add %%license and Changelog to %%doc.
+
+* Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 0.99.9-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
+* Tue Mar 21 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 0.99.9-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Sat Jan 07 2017 Xavier Bachelot <xavier@bachelot.org> - 0.99.9-3
 - Fix conditional BR on lirc-devel for EL7.
 
