@@ -6,7 +6,7 @@
 Summary:        A skinned xlib-based gui for xine-lib
 Name:           xine-ui
 Version:        0.99.10
-Release:        2%{?dist}
+Release:        3%{?dist}
 License:        GPLv2+
 URL:            http://www.xine-project.org/
 
@@ -66,6 +66,7 @@ Obsoletes:      xine < %{version}-%{release}
 BuildRequires:  aalib-devel >= 1.2.0
 BuildRequires:  curl-devel >= 7.10.2
 BuildRequires:  desktop-file-utils
+BuildRequires:  gcc
 BuildRequires:  gettext
 BuildRequires:  libcaca-devel
 BuildRequires:  libjpeg-turbo-devel
@@ -255,6 +256,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Fri Jul 20 2018 Xavier Bachelot <xavier@bachelot.org> - 0.99.10-3
+- Add BR: gcc.
+
 * Thu Mar 01 2018 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 0.99.10-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
