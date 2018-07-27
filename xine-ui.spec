@@ -6,7 +6,7 @@
 Summary:        A skinned xlib-based gui for xine-lib
 Name:           xine-ui
 Version:        0.99.10
-Release:        3%{?dist}
+Release:        4%{?dist}
 License:        GPLv2+
 URL:            http://www.xine-project.org/
 
@@ -256,6 +256,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Fri Jul 27 2018 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.99.10-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Fri Jul 20 2018 Xavier Bachelot <xavier@bachelot.org> - 0.99.10-3
 - Add BR: gcc.
 
