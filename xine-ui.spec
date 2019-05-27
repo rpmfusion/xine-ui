@@ -113,6 +113,7 @@ Requires:       xine-lib-extras
 
 %description aaxine
 This package contains the ASCII art player for terminals like the vt100.
+It also contains the color ascii art and framebuffer versions.
 
 
 %prep
@@ -220,8 +221,6 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %files -f 'xi\(ne-ui\|tk\)'.lang
 %license COPYING
 %doc ChangeLog doc/README*
-%{_bindir}/cacaxine
-%{_bindir}/fbxine
 %{_bindir}/xine
 %{_bindir}/xine-remote
 %dir %{_datadir}/xine/
@@ -249,6 +248,8 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files aaxine
 %{_bindir}/aaxine
+%{_bindir}/cacaxine
+%{_bindir}/fbxine
 %{_mandir}/man1/aaxine*
 %lang(de) %{_mandir}/de/man1/aaxine*
 %lang(es) %{_mandir}/es/man1/aaxine*
