@@ -163,11 +163,11 @@ export LIRC_CFLAGS="-llirc_client"
 export LIRC_LIBS="-llirc_client"
 #%configure --disable-dependency-tracking --enable-vdr-keys --with-aalib XINE_DOCPATH=%{_docdir}/%{name}-%{version}
 # Set documentation directory
-make %{?_smp_mflags}
+%make_build
 
 
 %install
-make install DESTDIR=%{buildroot} INSTALL="install -p"
+%make_install
 %find_lang 'xi\(ne-ui\|tk\)'
 
 desktop-file-install --remove-category="Application" --vendor="" \
