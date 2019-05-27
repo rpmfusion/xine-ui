@@ -3,15 +3,13 @@
 # hg version
 # %global hgdate 20091217
 
-Summary:        A skinned xlib-based gui for xine-lib
 Name:           xine-ui
 Version:        0.99.10
 Release:        7%{?dist}
+Summary:        A skinned xlib-based gui for xine-lib
 License:        GPLv2+
 URL:            http://www.xine-project.org/
-
 Source0:        http://sourceforge.net/projects/xine/files/xine-ui/%{version}/xine-ui-%{version}.tar.xz
-
 #Use source from hg for now to fix a few bugs
 #This tarball has been created with
 # hg clone http://hg.debian.org/hg/xine-lib/xine-ui/ xine-ui-0.99.6
@@ -19,11 +17,6 @@ Source0:        http://sourceforge.net/projects/xine/files/xine-ui/%{version}/xi
 # find xine-ui-0.99.6 -name .cvs* -exec rm -rf {} \;
 # tar jcf xine-ui-0.99.6-20091217.tar.bz2 xine-ui-0.99.6/
 # Source0:    xine-ui-%{version}-%{hgdate}.tar.bz2
-BuildRequires:  autoconf
-BuildRequires:  automake
-
-# Patch to use UTF-8 documentation, BZ #512598
-Patch1:         xine-ui-0.99.5-utf8doc.patch
 
 # Sources for -skins.
 Source1:        http://xine-project.org/skins/Antares.tar.gz
@@ -56,14 +49,15 @@ Source27:       http://xine-project.org/skins/pitt.tar.gz
 Source28:       http://xine-project.org/skins/Polaris.tar.gz
 Source29:       http://xine-project.org/skins/Sunset.tar.gz
 Source30:       http://xine-project.org/skins/xinium.tar.gz
-
 Source31:       default.ogv
 
-# Package used to be named xine
-Provides:       xine = %{version}-%{release}
-Obsoletes:      xine < %{version}-%{release}
+# Patch to use UTF-8 documentation, BZ #512598
+Patch1:         xine-ui-0.99.5-utf8doc.patch
+
 
 BuildRequires:  aalib-devel >= 1.2.0
+BuildRequires:  autoconf
+BuildRequires:  automake
 BuildRequires:  curl-devel >= 7.10.2
 BuildRequires:  desktop-file-utils
 BuildRequires:  gcc
@@ -88,6 +82,10 @@ BuildRequires:  xorg-x11-proto-devel
 Requires:       hicolor-icon-theme
 #
 Requires:       xine-lib-extras
+
+# Package used to be named xine
+Provides:       xine = %{version}-%{release}
+Obsoletes:      xine < %{version}-%{release}
 
 
 %description
