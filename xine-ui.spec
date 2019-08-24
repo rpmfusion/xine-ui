@@ -1,12 +1,12 @@
 # TODO, sometime: nvtvsimple
 
-%global         snapshot    0
-%global         date        20190801
-%global         commit      4176f3
+%global         snapshot    1
+%global         date        20190824
+%global         commit      894d90
 
 Name:           xine-ui
-Version:        0.99.10
-Release:        7%{?snapshot:.%{date}hg%{commit}}%{?dist}
+Version:        0.99.11
+Release:        1%{?snapshot:.%{date}hg%{commit}}%{?dist}
 Summary:        A skinned xlib-based gui for xine-lib
 License:        GPLv2+
 URL:            http://www.xine-project.org/
@@ -53,7 +53,7 @@ Source31:       default.ogv
 Source100:      make_xineui_snapshot.sh
 
 # Patch to use UTF-8 documentation, BZ #512598
-Patch1:         xine-ui-0.99.5-utf8doc.patch
+Patch1:         xine-ui-0.99.11-utf8doc.patch
 
 
 BuildRequires:  aalib-devel >= 1.2.0
