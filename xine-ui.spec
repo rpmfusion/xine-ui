@@ -256,6 +256,13 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sat Aug 24 2019 Xavier Bachelot <xavier@bachelot.org> - 0.99.11-1.20190824hg894d90
+- Update to 0.99.11.
+- Move cacaxine and fbxine to aaxine subpackage.
+- Allow to build from snapshot.
+- Use %make_build and %make_install.
+- Re-order specfile preamble.
+
 * Fri Aug 09 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.99.10-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
