@@ -1,22 +1,20 @@
 # TODO, sometime: nvtvsimple
 
-# hg version
-# %global hgdate 20091217
+%global         snapshot    0
+%global         date        20190801
+%global         commit      4176f3
 
 Name:           xine-ui
 Version:        0.99.10
-Release:        7%{?dist}
+Release:        7%{?snapshot:.%{date}hg%{commit}}%{?dist}
 Summary:        A skinned xlib-based gui for xine-lib
 License:        GPLv2+
 URL:            http://www.xine-project.org/
+%if ! 0%{?snapshot}
 Source0:        http://sourceforge.net/projects/xine/files/xine-ui/%{version}/xine-ui-%{version}.tar.xz
-#Use source from hg for now to fix a few bugs
-#This tarball has been created with
-# hg clone http://hg.debian.org/hg/xine-lib/xine-ui/ xine-ui-0.99.6
-# find xine-ui-0.99.6 -name .hg* -exec rm -rf {} \;
-# find xine-ui-0.99.6 -name .cvs* -exec rm -rf {} \;
-# tar jcf xine-ui-0.99.6-20091217.tar.bz2 xine-ui-0.99.6/
-# Source0:    xine-ui-%{version}-%{hgdate}.tar.bz2
+%else
+Source0:        xine-ui-%{version}hg.tar.xz
+%endif
 
 # Sources for -skins.
 Source1:        http://xine-project.org/skins/Antares.tar.gz
@@ -50,6 +48,9 @@ Source28:       http://xine-project.org/skins/Polaris.tar.gz
 Source29:       http://xine-project.org/skins/Sunset.tar.gz
 Source30:       http://xine-project.org/skins/xinium.tar.gz
 Source31:       default.ogv
+
+# Script to make a xine-ui snapshot
+Source100:      make_xineui_snapshot.sh
 
 # Patch to use UTF-8 documentation, BZ #512598
 Patch1:         xine-ui-0.99.5-utf8doc.patch
@@ -116,11 +117,11 @@ It also contains the color ascii art and framebuffer versions.
 
 %prep
 # Setup xine
-%setup0 -q
+%setup -q -n %{name}-%{version}%{?snapshot:hg}
 # Setup skins
-%setup1 -T -q -c -n %{name}-%{version}/fedoraskins -a1 -a2 -a3 -a4 -a5 -a6 -a7 -a8 -a9 -a10 -a11 -a12 -a13 -a14 -a15 -a16 -a17 -a18 -a19 -a20 -a21 -a22 -a23 -a24 -a25 -a26 -a27 -a28 -a29 -a30
+%setup1 -T -q -c -n %{name}-%{version}%{?snapshot:hg}/fedoraskins -a1 -a2 -a3 -a4 -a5 -a6 -a7 -a8 -a9 -a10 -a11 -a12 -a13 -a14 -a15 -a16 -a17 -a18 -a19 -a20 -a21 -a22 -a23 -a24 -a25 -a26 -a27 -a28 -a29 -a30
 # Restore directory
-%setup -T -D
+%setup -T -D -n %{name}-%{version}%{?snapshot:hg}
 
 %patch1 -p1
 
