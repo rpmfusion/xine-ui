@@ -1,5 +1,9 @@
 # TODO, sometime: nvtvsimple
 
+%if 0%{?el8}
+%global         _without_lirc  1
+%endif
+
 %global         snapshot    1
 %global         date        20190824
 %global         commit      894d90
@@ -74,7 +78,7 @@ BuildRequires:  libXt-devel
 BuildRequires:  libXtst-devel
 BuildRequires:  libXv-devel
 BuildRequires:  libXxf86vm-devel
-BuildRequires:  lirc-devel
+%{!?_without_lirc:BuildRequires:  lirc-devel}
 BuildRequires:  readline-devel
 BuildRequires:  xine-lib-devel >= 1.1.0
 BuildRequires:  xorg-x11-proto-devel
@@ -160,8 +164,10 @@ sed -i 's,default.avi,default.ogv,' misc/visuals/Makefile.in
 
 %build
 ./autogen.sh noconfig
+%if 0%{!?_without_lirc}
 export LIRC_CFLAGS="-llirc_client"
 export LIRC_LIBS="-llirc_client"
+%endif
 #%configure --disable-dependency-tracking --enable-vdr-keys --with-aalib XINE_DOCPATH=%{_docdir}/%{name}-%{version}
 # Set documentation directory
 %make_build
@@ -262,6 +268,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 - Allow to build from snapshot.
 - Use %make_build and %make_install.
 - Re-order specfile preamble.
+- Disable lirc support for EL8.
 
 * Fri Aug 09 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.99.10-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
