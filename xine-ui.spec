@@ -1,8 +1,8 @@
 # TODO, sometime: nvtvsimple
 
-%if 0%{?el8}
-%global         _without_lirc  1
-%endif
+#if 0%{?el8}
+#global         _without_lirc  1
+#endif
 
 #global         snapshot    1
 #global         date        20190824
