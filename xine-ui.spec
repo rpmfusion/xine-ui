@@ -158,9 +158,6 @@ cp -a src/xitk/xine-toolkit/README doc/README.xitk
 find fedoraskins/ -type d -name "CVS" -exec rm -rf {} \; || :
 find fedoraskins/ -type d -name ".xvpics" -exec rm -rf {} \; || :
 
-sed -i 's,default.avi,default.ogv,' src/xitk/actions.c
-sed -i 's,default.avi,default.ogv,' misc/visuals/Makefile.in
-
 
 %build
 ./autogen.sh noconfig
@@ -183,9 +180,6 @@ desktop-file-install --remove-category="Application" --vendor="" \
 
 # Remove the desktop file installed in the wrong place 
 rm -rf %{buildroot}%{_datadir}/xine/desktop
-
-# Remove the default avi. Gets replaced with default.ogv
-rm -rf %{buildroot}%{_datadir}/xine/visuals/default.avi
 
 # Remove automatically installed documentation (listed in %doc)
 rm -rf %{buildroot}%{_docdir}/
