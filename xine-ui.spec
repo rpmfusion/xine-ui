@@ -257,6 +257,12 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Dec 10 2019 Xavier Bachelot <xavier@bachelot.org> - 0.99.12-1
+- Update to 0.99.12.
+- Drop now unneeded logo tweaks.
+- Re-enable lirc support for EL8.
+- Conditionalize snippets needed only for older than EL8 releases.
+
 * Sat Aug 24 2019 Xavier Bachelot <xavier@bachelot.org> - 0.99.11-1.20190824hg894d90
 - Update to 0.99.11.
 - Move cacaxine and fbxine to aaxine subpackage.
