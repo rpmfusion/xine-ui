@@ -196,6 +196,7 @@ rm -f %{buildroot}%{_mandir}/man1/xine-check.*
 cp -a fedoraskins/* %{buildroot}%{_datadir}/xine/skins/
 
 
+%if 0%{?rhel} && 0%{?rhel} < 8
 %post
 # Mime type
 update-desktop-database &> /dev/null || :
@@ -215,6 +216,7 @@ fi
 
 %posttrans
 gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+%endif
 
 
 %files -f 'xi\(ne-ui\|tk\)'.lang
