@@ -178,9 +178,6 @@ desktop-file-install --remove-category="Application" --vendor="" \
     --add-category="Audio" --add-category="Video" \
     --dir %{buildroot}%{_datadir}/applications misc/desktops/xine.desktop
 
-# Remove the desktop file installed in the wrong place 
-rm -rf %{buildroot}%{_datadir}/xine/desktop
-
 # Remove automatically installed documentation (listed in %doc)
 rm -rf %{buildroot}%{_docdir}/
 
