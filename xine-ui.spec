@@ -4,12 +4,12 @@
 %global         _without_lirc  1
 %endif
 
-%global         snapshot    1
-%global         date        20190824
-%global         commit      894d90
+#global         snapshot    1
+#global         date        20190824
+#global         commit      894d90
 
 Name:           xine-ui
-Version:        0.99.11
+Version:        0.99.12
 Release:        1%{?snapshot:.%{date}hg%{commit}}%{?dist}
 Summary:        A skinned xlib-based gui for xine-lib
 License:        GPLv2+
@@ -231,6 +231,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %dir %{_datadir}/xine/
 %dir %{_datadir}/xine/skins/
 %{_datadir}/xine/skins/xinetic/
+%{_datadir}/xine/skins/xine-ui_logo.mpg
 %{_datadir}/xine/skins/xine-ui_logo.png
 %{_datadir}/xine/skins/xine_splash.png
 %{_datadir}/xine/oxine/
@@ -248,6 +249,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %files skins
 %{_datadir}/xine/skins/*
 %exclude %{_datadir}/xine/skins/xinetic/
+%exclude %{_datadir}/xine/skins/xine-ui_logo.mpg
 %exclude %{_datadir}/xine/skins/xine-ui_logo.png
 %exclude %{_datadir}/xine/skins/xine_splash.png
 
