@@ -136,17 +136,13 @@ if [ -n "$libx11so" -a -f "$libx11so" ] ; then
     sed -i -e "s/\"libX11\\.so\"/\"$(basename $libx11so)\"/" src/aaui/main.c
 fi
 
-for f in doc/man/{de,es,fr}/*.1* doc/README?{cs,de,es,fi,fr,it} ; do
+# Fix file encoding
+for f in doc/man/{de,es,fr}/*.1* ; do
     iconv -f iso-8859-1 -t utf-8 $f > $f.utf8 && \
     touch -r $f $f.utf8 && \
     mv $f.utf8 $f
 done
-for f in doc/man/pl/*.1* doc/README?{cs,pl}* ; do
-    iconv -f iso-8859-2 -t utf-8 $f > $f.utf8 && \
-    touch -r $f $f.utf8 && \
-     mv $f.utf8 $f
-done
-for f in src/xitk/xine-toolkit/README ; do
+for f in doc/man/pl/*.1* src/xitk/xine-toolkit/README ; do
     iconv -f iso-8859-2 -t utf-8 $f > $f.utf8 && \
     touch -r $f $f.utf8 && \
      mv $f.utf8 $f
@@ -262,6 +258,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 - Drop now unneeded logo tweaks.
 - Re-enable lirc support for EL8.
 - Conditionalize snippets needed only for older than EL8 releases.
+- Clean up file encoding fix.
 
 * Sat Aug 24 2019 Xavier Bachelot <xavier@bachelot.org> - 0.99.11-1.20190824hg894d90
 - Update to 0.99.11.
