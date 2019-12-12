@@ -69,8 +69,8 @@ BuildRequires:  gcc
 BuildRequires:  gettext
 BuildRequires:  libcaca-devel
 BuildRequires:  libjpeg-turbo-devel
+BuildRequires:  libncurses-devel
 BuildRequires:  libpng-devel >= 1.5
-BuildRequires:  libtermcap-devel
 BuildRequires:  libXft-devel
 BuildRequires:  libXi-devel
 BuildRequires:  libXinerama-devel
@@ -259,6 +259,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 - Re-enable lirc support for EL8.
 - Conditionalize snippets needed only for older than EL8 releases.
 - Clean up file encoding fix.
+- Fix obsolete BR: libtermcap-devel, BR: libncurses-devel instead.
 
 * Sat Aug 24 2019 Xavier Bachelot <xavier@bachelot.org> - 0.99.11-1.20190824hg894d90
 - Update to 0.99.11.
