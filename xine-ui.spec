@@ -10,7 +10,7 @@
 
 Name:           xine-ui
 Version:        0.99.12
-Release:        2%{?snapshot:.%{date}hg%{commit}}%{?dist}
+Release:        3%{?snapshot:.%{date}hg%{commit}}%{?dist}
 Summary:        A skinned xlib-based gui for xine-lib
 License:        GPLv2+
 URL:            http://www.xine-project.org/
@@ -253,6 +253,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Wed Aug 19 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.99.12-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Wed Feb 05 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.99.12-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
