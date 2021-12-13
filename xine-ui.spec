@@ -9,8 +9,8 @@
 #global         commit      894d90
 
 Name:           xine-ui
-Version:        0.99.12
-Release:        5%{?snapshot:.%{date}hg%{commit}}%{?dist}
+Version:        0.99.13
+Release:        1%{?snapshot:.%{date}hg%{commit}}%{?dist}
 Summary:        A skinned xlib-based gui for xine-lib
 License:        GPLv2+
 URL:            http://www.xine-project.org/
@@ -57,8 +57,7 @@ Source31:       default.ogv
 Source100:      make_xineui_snapshot.sh
 
 # Patch to use UTF-8 documentation, BZ #512598
-Patch1:         xine-ui-0.99.11-utf8doc.patch
-
+Patch1:         xine-ui-0.99.13-utf8doc.patch
 
 BuildRequires:  aalib-devel >= 1.2.0
 BuildRequires:  autoconf
@@ -220,15 +219,19 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %dir %{_datadir}/xine/
 %dir %{_datadir}/xine/skins/
 %{_datadir}/xine/skins/xinetic/
+%{_datadir}/xine/skins/missing.png
+%{_datadir}/xine/skins/xine_64.png
+%{_datadir}/xine/skins/xine_splash.png
 %{_datadir}/xine/skins/xine-ui_logo.mpg
 %{_datadir}/xine/skins/xine-ui_logo.png
-%{_datadir}/xine/skins/xine_splash.png
 %{_datadir}/xine/oxine/
 %{_datadir}/xine/visuals/
 %{_datadir}/mime/packages/xine-ui.xml
 %{_datadir}/applications/*xine.desktop
 %{_datadir}/icons/hicolor/*x*/apps/xine.png
+%{_datadir}/icons/hicolor/scalable/apps/xine.svgz
 %{_datadir}/pixmaps/xine.xpm
+%{_datadir}/pixmaps/xine_32.xpm
 %{_mandir}/man1/xine*
 %lang(de) %{_mandir}/de/man1/xine*
 %lang(es) %{_mandir}/es/man1/xine*
@@ -238,9 +241,11 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %files skins
 %{_datadir}/xine/skins/*
 %exclude %{_datadir}/xine/skins/xinetic/
+%exclude %{_datadir}/xine/skins/missing.png
+%exclude %{_datadir}/xine/skins/xine_64.png
+%exclude %{_datadir}/xine/skins/xine_splash.png
 %exclude %{_datadir}/xine/skins/xine-ui_logo.mpg
 %exclude %{_datadir}/xine/skins/xine-ui_logo.png
-%exclude %{_datadir}/xine/skins/xine_splash.png
 
 %files aaxine
 %{_bindir}/aaxine
@@ -253,6 +258,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Mon Dec 13 2021 Xavier Bachelot <xavier@bachelot.org> - 0.99.13-1
+- Update to 0.99.13
+
 * Tue Aug 03 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 0.99.12-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
