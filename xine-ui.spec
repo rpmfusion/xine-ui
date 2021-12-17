@@ -10,7 +10,7 @@
 
 Name:           xine-ui
 Version:        0.99.13
-Release:        1%{?snapshot:.%{date}hg%{commit}}%{?dist}
+Release:        2%{?snapshot:.%{date}hg%{commit}}%{?dist}
 Summary:        A skinned xlib-based gui for xine-lib
 License:        GPLv2+
 URL:            http://www.xine-project.org/
@@ -58,6 +58,10 @@ Source100:      make_xineui_snapshot.sh
 
 # Patch to use UTF-8 documentation, BZ #512598
 Patch1:         xine-ui-0.99.13-utf8doc.patch
+
+# Fix build on armv7hl, ppc64le and aarch64
+# https://sourceforge.net/p/xine/xine-ui/ci/f9a98e02460348ca23ca2f5c2b39e62c8758b22d/
+Patch100:       xine-ui-0.9.13-Fix_build.patch
 
 BuildRequires:  aalib-devel >= 1.2.0
 BuildRequires:  autoconf
@@ -127,6 +131,7 @@ It also contains the color ascii art and framebuffer versions.
 %setup -T -D -n %{name}-%{version}%{?snapshot:hg}
 
 %patch1 -p1
+%patch100 -p1
 
 # By default aaxine dlopen()'s a nonversioned libX11.so, however in Fedora
 # it's provided by libX11-devel => version the dlopen()
@@ -258,6 +263,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Fri Dec 17 2021 Xavier Bachelot <xavier@bachelot.org> - 0.99.13-2
+- Fix build on armv7hl, ppc64le and aarch64
+
 * Mon Dec 13 2021 Xavier Bachelot <xavier@bachelot.org> - 0.99.13-1
 - Update to 0.99.13
 
