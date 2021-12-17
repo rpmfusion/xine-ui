@@ -62,6 +62,8 @@ Patch1:         xine-ui-0.99.13-utf8doc.patch
 # Fix build on armv7hl, ppc64le and aarch64
 # https://sourceforge.net/p/xine/xine-ui/ci/f9a98e02460348ca23ca2f5c2b39e62c8758b22d/
 Patch100:       xine-ui-0.9.13-Fix_build.patch
+# https://raw.githubusercontent.com/macports/macports-ports/f925ff1a4f8d59a40735ff52dc486d4b89a7c8c8/multimedia/xine-ui/files/libcaca0.99.beta20.patch
+Patch101:       xine-ui-0.9.13-libcaca_beta20.patch
 
 BuildRequires:  aalib-devel >= 1.2.0
 BuildRequires:  autoconf
@@ -132,6 +134,7 @@ It also contains the color ascii art and framebuffer versions.
 
 %patch1 -p1
 %patch100 -p1
+%patch101 -p0
 
 # By default aaxine dlopen()'s a nonversioned libX11.so, however in Fedora
 # it's provided by libX11-devel => version the dlopen()
@@ -265,6 +268,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %changelog
 * Fri Dec 17 2021 Xavier Bachelot <xavier@bachelot.org> - 0.99.13-2
 - Fix build on armv7hl, ppc64le and aarch64
+- Fix build with libcaca >= 0.99.beta20
 
 * Mon Dec 13 2021 Xavier Bachelot <xavier@bachelot.org> - 0.99.13-1
 - Update to 0.99.13
