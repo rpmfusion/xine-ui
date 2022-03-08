@@ -1,8 +1,11 @@
 # TODO, sometime: nvtvsimple
 
-#if 0%{?el8}
-#global         _without_lirc  1
-#endif
+%if 0%{?el9}
+# RHBZ 2031269
+%global         _without_caca  1
+# RHBZ 2030927
+%global         _without_lirc  1
+%endif
 
 #global         snapshot    1
 #global         date        20190824
@@ -10,7 +13,7 @@
 
 Name:           xine-ui
 Version:        0.99.13
-Release:        3%{?snapshot:.%{date}hg%{commit}}%{?dist}
+Release:        4%{?snapshot:.%{date}hg%{commit}}%{?dist}
 Summary:        A skinned xlib-based gui for xine-lib
 License:        GPLv2+
 URL:            http://www.xine-project.org/
@@ -72,7 +75,7 @@ BuildRequires:  curl-devel >= 7.10.2
 BuildRequires:  desktop-file-utils
 BuildRequires:  gcc
 BuildRequires:  gettext
-BuildRequires:  libcaca-devel
+%{!?_without_caca:BuildRequires:  libcaca-devel}
 BuildRequires:  libjpeg-turbo-devel
 BuildRequires:  libpng-devel >= 1.5
 BuildRequires:  libXft-devel
@@ -121,7 +124,7 @@ Requires:       xine-lib-extras
 
 %description aaxine
 This package contains the ASCII art player for terminals like the vt100.
-It also contains the color ascii art and framebuffer versions.
+It also contains the %{!?_without_caca:color ascii art and} framebuffer version%{!?_without_caca:s}.
 
 
 %prep
@@ -257,7 +260,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 %files aaxine
 %{_bindir}/aaxine
-%{_bindir}/cacaxine
+%{!?_without_caca:%{_bindir}/cacaxine}
 %{_bindir}/fbxine
 %{_mandir}/man1/aaxine*
 %lang(de) %{_mandir}/de/man1/aaxine*
@@ -266,6 +269,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Mar 08 2022 Xavier Bachelot <xavier@bachelot.org> - 0.99.13-4
+- Add support for EL9
+
 * Wed Feb 09 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 0.99.13-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
