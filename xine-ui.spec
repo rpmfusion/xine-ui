@@ -13,7 +13,7 @@
 
 Name:           xine-ui
 Version:        0.99.13
-Release:        4%{?snapshot:.%{date}hg%{commit}}%{?dist}
+Release:        5%{?snapshot:.%{date}hg%{commit}}%{?dist}
 Summary:        A skinned xlib-based gui for xine-lib
 License:        GPLv2+
 URL:            http://www.xine-project.org/
@@ -269,6 +269,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Mon Aug 08 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 0.99.13-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
+  5.1
+
 * Tue Mar 08 2022 Xavier Bachelot <xavier@bachelot.org> - 0.99.13-4
 - Add support for EL9
 
