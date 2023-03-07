@@ -1,12 +1,5 @@
 # TODO, sometime: nvtvsimple
 
-%if 0%{?el9}
-# RHBZ 2031269
-%global         _without_caca  1
-# RHBZ 2030927
-%global         _without_lirc  1
-%endif
-
 #global         snapshot    1
 #global         date        20190824
 #global         commit      894d90
@@ -265,6 +258,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %changelog
 * Sat Jan 07 2023 Xavier Bachelot <xavier@bachelot.org> - 0.99.14-1
 - Update to 0.99.14
+- Enable lirc and libcaca for EL9
 
 * Mon Aug 08 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 0.99.13-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
