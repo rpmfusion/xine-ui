@@ -12,8 +12,8 @@
 #global         commit      894d90
 
 Name:           xine-ui
-Version:        0.99.13
-Release:        5%{?snapshot:.%{date}hg%{commit}}%{?dist}
+Version:        0.99.14
+Release:        1%{?snapshot:.%{date}hg%{commit}}%{?dist}
 Summary:        A skinned xlib-based gui for xine-lib
 License:        GPLv2+
 URL:            http://www.xine-project.org/
@@ -61,12 +61,6 @@ Source100:      make_xineui_snapshot.sh
 
 # Patch to use UTF-8 documentation, BZ #512598
 Patch1:         xine-ui-0.99.13-utf8doc.patch
-
-# Fix build on armv7hl, ppc64le and aarch64
-# https://sourceforge.net/p/xine/xine-ui/ci/f9a98e02460348ca23ca2f5c2b39e62c8758b22d/
-Patch100:       xine-ui-0.9.13-Fix_build.patch
-# https://raw.githubusercontent.com/macports/macports-ports/f925ff1a4f8d59a40735ff52dc486d4b89a7c8c8/multimedia/xine-ui/files/libcaca0.99.beta20.patch
-Patch101:       xine-ui-0.9.13-libcaca_beta20.patch
 
 BuildRequires:  aalib-devel >= 1.2.0
 BuildRequires:  autoconf
@@ -136,8 +130,6 @@ It also contains the %{!?_without_caca:color ascii art and} framebuffer version%
 %setup -T -D -n %{name}-%{version}%{?snapshot:hg}
 
 %patch1 -p1
-%patch100 -p1
-%patch101 -p0
 
 # By default aaxine dlopen()'s a nonversioned libX11.so, however in Fedora
 # it's provided by libX11-devel => version the dlopen()
@@ -247,6 +239,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %lang(de) %{_mandir}/de/man1/xine*
 %lang(es) %{_mandir}/es/man1/xine*
 %lang(fr) %{_mandir}/fr/man1/xine*
+%lang(nl) %{_mandir}/nl/man1/xine*
 %lang(pl) %{_mandir}/pl/man1/xine*
 
 %files skins
@@ -265,10 +258,14 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_mandir}/man1/aaxine*
 %lang(de) %{_mandir}/de/man1/aaxine*
 %lang(es) %{_mandir}/es/man1/aaxine*
+%lang(nl) %{_mandir}/nl/man1/aaxine*
 %lang(pl) %{_mandir}/pl/man1/aaxine*
 
 
 %changelog
+* Sat Jan 07 2023 Xavier Bachelot <xavier@bachelot.org> - 0.99.14-1
+- Update to 0.99.14
+
 * Mon Aug 08 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 0.99.13-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
